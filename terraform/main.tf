@@ -23,6 +23,23 @@ resource "aws_security_group" "jenkins_sg" {
     cidr_blocks = [var.allowed_cidr]
   }
 
+  ingress {
+    description = "GitHub webhook access"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+
+    cidr_blocks = [
+      "9.234.106.48/28",
+      "9.234.98.160/28",
+      "9.234.98.176/28",
+      "192.30.252.0/22",
+      "185.199.108.0/22",
+      "140.82.112.0/20",
+      "143.55.64.0/20"
+    ]
+  }
+
   egress {
     description = "Outbound internet access"
     from_port   = 0
